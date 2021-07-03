@@ -13,7 +13,4 @@ public class OrderResponse extends BaseResponse {
         return orderTotal;
     }
 
-    public void setOrderTotal(int orderTotal) {
-        this.orderTotal = orderTotal;
-    }
 }
