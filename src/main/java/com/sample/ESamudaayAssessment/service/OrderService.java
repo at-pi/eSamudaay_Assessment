@@ -17,9 +17,9 @@ public class OrderService {
     @PostConstruct
     public void init() {
         distanceFees = new ArrayList<>();
-        distanceFees.add(new DistanceFee(5_000, 10));
-        distanceFees.add(new DistanceFee(10_000, 20));
-        distanceFees.add(new DistanceFee(50_000, 50));
+        distanceFees.add(new DistanceFee(5_000, 10_000));
+        distanceFees.add(new DistanceFee(10_000, 20_000));
+        distanceFees.add(new DistanceFee(50_000, 50_000));
         distanceFees.add(new DistanceFee(100_000, Integer.MAX_VALUE));
     }
 
@@ -37,17 +37,20 @@ public class OrderService {
 
         if (order.getOffer() != null) {
             System.out.println("applying offer: " + order.getOffer().getOfferType());
-            long discount = findBestDiscount(order.getOffer(), deliveryFees);
+            long discount = findDiscount(order.getOffer(), deliveryFees);
             orderTotal -= discount;
         }
 
         orderTotal = orderTotal < 0 ? 0 : orderTotal; //setting total to be 0 if negative
         System.out.println("final order total: " + orderTotal);
         orderResponse.setOrderTotal(orderTotal);
-        return orderResponse;
+         return orderResponse;
     }
 
-    private long findBestDiscount(Offer offer, int deliveryFees) { //handles case for FLAT and DELIVERY type of discounts
+    /**
+     * handles case for FLAT and DELIVERY type of discounts
+     */
+    private long findDiscount(Offer offer, int deliveryFees) {
         switch (offer.getOfferType()) {
             case FLAT:
                 return offer.getOfferVal();
@@ -67,7 +70,7 @@ public class OrderService {
                 return o1.getDistance() - o2.getDistance();
             }
         });
-        distanceFeeIndex = distanceFeeIndex < 0 ? distanceFeeIndex + distanceFees.size() : distanceFeeIndex; //calculating the index where distance falls
+        distanceFeeIndex = distanceFeeIndex < 0 ? (-1)*distanceFeeIndex - 1 : distanceFeeIndex; //calculating the index where distance falls
         return distanceFees.get(distanceFeeIndex).getFees();
     }
 }
