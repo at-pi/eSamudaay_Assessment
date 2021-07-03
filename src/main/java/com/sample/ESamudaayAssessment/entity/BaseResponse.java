@@ -1,6 +1,6 @@
 package com.sample.ESamudaayAssessment.entity;
 
-public class BaseResponse {
+public class BaseResponse { //base response entity which contain code and message
 
     private Integer code;
     private String message;

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class Order {
+public class Order { //order input which will be received in API
 
     @JsonProperty(value = "order_items")
     private List<OrderItem> orderItems;

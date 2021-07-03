@@ -1,6 +1,6 @@
 package com.sample.ESamudaayAssessment.entity;
 
-public class DistanceFee {
+public class DistanceFee { //data structure for distance fees calculation
     int fees;
     int distance;
 

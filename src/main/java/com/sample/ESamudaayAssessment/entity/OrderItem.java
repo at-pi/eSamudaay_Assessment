@@ -1,6 +1,6 @@
 package com.sample.ESamudaayAssessment.entity;
 
-public class OrderItem {
+public class OrderItem { //orderitem entity and getter setter methods
 
     private String name;
     private int quantity;

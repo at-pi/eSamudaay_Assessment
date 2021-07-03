@@ -23,7 +23,7 @@ public class OrderService {
         distanceFees.add(new DistanceFee(100_000, Integer.MAX_VALUE));
     }
 
-    public OrderResponse calculateTotal(Order order) {
+    public OrderResponse calculateTotal(Order order) { //method to calculate total price of the order
         OrderResponse orderResponse = new OrderResponse();
         long orderTotal = 0;
         for (OrderItem orderItem : order.getOrderItems()) {
@@ -41,13 +41,13 @@ public class OrderService {
             orderTotal -= discount;
         }
 
-        orderTotal = orderTotal < 0 ? 0 : orderTotal;
+        orderTotal = orderTotal < 0 ? 0 : orderTotal; //setting total to be 0 if negative
         System.out.println("final order total: " + orderTotal);
         orderResponse.setOrderTotal(orderTotal);
         return orderResponse;
     }
 
-    private long findBestDiscount(Offer offer, int deliveryFees) {
+    private long findBestDiscount(Offer offer, int deliveryFees) { //handles case for FLAT and DELIVERY type of discounts
         switch (offer.getOfferType()) {
             case FLAT:
                 return offer.getOfferVal();
@@ -61,13 +61,13 @@ public class OrderService {
         //creating dummy distance fees object for binary search
         DistanceFee df = new DistanceFee(-1, distance);
 
-        int distanceFeeIndex = Collections.binarySearch(distanceFees, df, new Comparator<DistanceFee>() {
+        int distanceFeeIndex = Collections.binarySearch(distanceFees, df, new Comparator<DistanceFee>() { //defined comparator for binary search in distance fees list of distance fee structure
             @Override
             public int compare(DistanceFee o1, DistanceFee o2) {
                 return o1.getDistance() - o2.getDistance();
             }
         });
-        distanceFeeIndex = distanceFeeIndex < 0 ? distanceFeeIndex + distanceFees.size() : distanceFeeIndex;
+        distanceFeeIndex = distanceFeeIndex < 0 ? distanceFeeIndex + distanceFees.size() : distanceFeeIndex; //calculating the index where distance falls
         return distanceFees.get(distanceFeeIndex).getFees();
     }
 }

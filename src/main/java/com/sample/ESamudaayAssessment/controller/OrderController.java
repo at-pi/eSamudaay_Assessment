@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class OrderController {
+public class OrderController { //main controller for the application
 
     @Autowired
-    private OrderService calculateTotalService;
+    private OrderService calculateTotalService; //creating autowired ojects for singleton type creation
 
     @Autowired
     private OrderValidator orderValidator;
@@ -23,12 +23,12 @@ public class OrderController {
     @PostMapping("/order")
     @ResponseBody
     public OrderResponse orderItems(@RequestBody Order order) {
-        OrderResponse orderResponse = new OrderResponse();
+        OrderResponse orderResponse = new OrderResponse(); //object for response changes its structure for output json based on null values
         try {
             boolean areItemsValid = orderValidator.validateItems(order.getOrderItems());
             if (!areItemsValid) {
-                orderResponse.setCode(2000);
-                orderResponse.setMessage("item quantity/price is more than allowed limit");
+                orderResponse.setCode(2000); //defined codes it can be modified based later
+                orderResponse.setMessage("item quantity/price is more than allowed limit"); //custom message for invalid input
                 return orderResponse;
             }
 

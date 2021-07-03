@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class OrderValidator {
+public class OrderValidator { //validator service based defined contants which can modified
 
     public boolean validateItems(List<OrderItem> orderItems){
 

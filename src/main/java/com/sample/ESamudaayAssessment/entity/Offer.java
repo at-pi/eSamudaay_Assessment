@@ -3,7 +3,7 @@ package com.sample.ESamudaayAssessment.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.validation.annotation.Validated;
 
-public class Offer {
+public class Offer { //enitity to calculate discount
 
     @JsonProperty(value = "offer_type")
     private OfferType offerType;
